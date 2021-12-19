@@ -1,0 +1,21 @@
+version: '2'
+services:
+    web:
+        build: .
+        ports:
+            - "5049:5049"
+        networks:
+          - web
+        volumes:
+            - .:/myapp
+        restart: always
+        labels:
+          traefik.enable: true
+          traefik.port: 5049
+          traefik.frontend.rule: "Host:blahaj.janamarie.dev,blåhaj.janamarie.dev,haj.janamarie.dev,haj.gf"
+          traefik.frontend.redirect.entryPoint: "https"
+          traefik.docker.network: web
+
+networks:
+  web:
+    external: true
